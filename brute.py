@@ -136,7 +136,7 @@ if __name__ == '__main__':
     # except Exception:
     #     xhelp()
 
-    # 开始爆破
+    # 开始爆破1
     ssh_ips = load_file("../ssh_fuce_ip1.txt")
     for hostname in ssh_ips:
         brute_ssh(hostname=hostname, port=port, username_list=username_list, password_list=password_list)
