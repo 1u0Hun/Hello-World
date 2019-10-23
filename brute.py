@@ -64,7 +64,7 @@ def brute_ssh(hostname, port='22', username_list='', password_list=''):
 
     for u in usernames:
         count += 1
-        print('[-] trying ' + str(count) + ' data...\tu=' + u + '\tp=' + p)
+        print('[-] trying ' + str(count) + ' data...\tu=' + u + '\tp=' + u)
         time.sleep(0.1)
         try:
             ssh.connect(hostname=hostname, port=port, username=u, password=u)
