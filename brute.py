@@ -42,6 +42,7 @@ ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 f = open("s.txt","w+")
 def brute_ssh(hostname, port='22', username_list='', password_list=''):
     # 初始化list
+    print(hostname)
     usernames = load_file(username_list)
     passwords = load_file(password_list)
 
@@ -63,7 +64,7 @@ def brute_ssh(hostname, port='22', username_list='', password_list=''):
 
     for u in usernames:
         count += 1
-        print('[-] trying ' + str(count) + ' data...\tu=' + u + '\tp=' + u)
+        print('[-] trying ' + str(count) + ' data...\tu=' + u + '\tp=' + p)
         time.sleep(0.1)
         try:
             ssh.connect(hostname=hostname, port=port, username=u, password=u)
